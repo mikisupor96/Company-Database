@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Database</title>
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/Images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/Images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/Images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./assets/Images/favicon/site.webmanifest" />
+
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Add new user modal -->
+    <div class="modal" id="addUserModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Employee</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" class="createUser needs-validation">
+              <div class="form-group">
+                <label for="firstName">First name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  placeholder="John"
+                  name="firstName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  placeholder="Doe"
+                  name="lastName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="name@example.com"
+                  name="email"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="department">Department </label>
+                <select
+                  class="form-control department-select"
+                  name="department"
+                ></select>
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  id="addUser"
+                  type="submit"
+                  value="Submit"
+                  class="btn btn-success"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add new department modal -->
+    <div class="modal" id="addDepartmentModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Department</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" class="createDepartment needs-validation">
+              <div class="form-group">
+                <label for="departmentName">Department </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="departmentName"
+                  placeholder="IT"
+                  name="departmentName"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="locationOfDepartment">Location </label>
+                <select
+                  class="form-control location-select"
+                  id="locationOfDepartment"
+                  placeholder="Malaysia"
+                  name="locationOfDepartment"
+                ></select>
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  id="addDepartment"
+                  type="submit"
+                  value="Submit"
+                  class="btn btn-success"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add new location modal -->
+    <div class="modal" id="addLocationModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Location</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" class="createLocation needs-validation">
+              <div class="form-group">
+                <label for="locationName">Location</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="locationName"
+                  placeholder="Singapore"
+                  name="locationName"
+                  required
+                />
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  id="addLocation"
+                  type="submit"
+                  value="Submit"
+                  class="btn btn-success"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit user modal -->
+    <div id="editUserModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit Employee</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" class="editUser needs-validation">
+              <div class="form-group">
+                <label for="editFirstName">First name</label>
+                <input
+                  id="editFirstName"
+                  type="text"
+                  class="form-control"
+                  name="editFirstName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last name</label>
+                <input
+                  id="editLastName"
+                  type="text"
+                  class="form-control"
+                  name="lastName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input
+                  id="editEmail"
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="department">Department </label>
+                <select
+                  class="form-control department-select"
+                  name="department"
+                ></select>
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  value="Submit"
+                  class="btn btn-success editButton"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit department modal -->
+    <div id="editDepModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Name</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" class="editDep needs-validation">
+              <div class="form-group">
+                <label for="editDepartmentName">Department </label>
+                <input
+                  id="editDepartmentName"
+                  type="text"
+                  class="form-control"
+                  name="editDepartmentName"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="editLocationOfDepartment">Location</label>
+                <select
+                  class="form-control location-select"
+                  id="editLocationOfDepartment"
+                  name="editLocationOfDepartment"
+                ></select>
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="submit"
+                  value="Submit"
+                  class="btn btn-success editButton"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit locations modal -->
+    <div id="editLocModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Name</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" class="editLoc needs-validation">
+              <div class="form-group">
+                <label for="editLocationName">Location Name</label>
+                <input
+                  id="editLocationName"
+                  type="text"
+                  class="form-control"
+                  name="editLocationName"
+                  required
+                />
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="submit"
+                  value="Submit"
+                  class="btn btn-success editButton"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm deletion modal -->
+    <div id="deleteModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form method="post" class="deleteForm">
+              <p>Are you sure you want to delete this?</p>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success yesDelete">
+                  Yes
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  data-dismiss="modal"
+                >
+                  No
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message modal -->
+    <div id="messageModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4></h4>
+          </div>
+          <div class="modal-body">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav bar -->
+    <div class="container">
+      <nav class="navbar sticky-top navbar-light bg-light">
+        <form class="form-inline">
+          <select class="custom-select mr-1" id="searchOption">
+            <option value="personnel" selected>Personnel</option>
+            <option value="department">Departments</option>
+            <option value="location">Locations</option>
+          </select>
+          <div class="input-group w-50">
+            <input
+              id="searchBox"
+              type="search"
+              class="form-control"
+              placeholder="Search"
+            />
+            <button
+              id="searchButton"
+              type="submit"
+              class="btn btn-success input-group-text"
+            >
+              <img src="./assets/Images/search.svg" alt="search button" />
+            </button>
+            <button
+              id="addButton"
+              class="btn btn-primary ml-1 input-group-text"
+              type="submit"
+              data-toggle="modal"
+              data-target="#addUserModal"
+            >
+              <img src="./assets/Images/add.svg" alt="add button" />
+            </button>
+          </div>
+        </form>
+        <a
+          class="navbar-brand"
+          href="https://github.com/mikisupor96/Company-CMS"
+          target="_blank"
+        >
+          <img
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            src="./assets/Images/favicon/favicon-32x32.png"
+        /></a>
+      </nav>
+      <div class="result"></div>
+    </div>
+
+    <script src="./assets/javascript/jquery.js"></script>
+    <script src="./assets/javascript/popper.js"></script>
+    <script src="./assets/javascript/bootstrap.min.js"></script>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
