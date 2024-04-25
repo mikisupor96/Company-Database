@@ -1,1 +1,9 @@
-CP Database is a content management system designed for a fictitious company, according to the specifications provided by the customer. I developed all the front-end and back-end features using JavaScript, jQuery, and Bootstrap for the front-end, and PHP and MySQL for the back-end. The system follows the CRUD principles across all tabs, which include Personnel, Department, and Location.
+# What is Company Database?
+
+- CP Database is a user-friendly content management system specifically designed for companies that operate from multiple locations. This system allows administrators to create new users, edit existing users, delete users, and search for already created users with ease.
+
+# What languages does Company Database use?
+
+- The application is built on various technologies including `HTML`, `CSS`, `Javascript`, `Jquery`, `Bootstrap`, `PHP`, and `MySql`. Although the database is hosted on a separate platform, it can also be run locally for convenience and flexibility.
+
+
